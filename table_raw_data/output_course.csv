@@ -1,0 +1,54 @@
+course_code,course_name
+COMP1117_1A,Computer programming
+COMP2113_1A,Programming technologies
+COMP2113_1B,Programming technologies
+COMP2113_1C,Programming technologies
+COMP2119_1A,Introduction to data structures and algorithms
+COMP2121_1A,Discrete mathematics
+COMP2121_1B,Discrete mathematics
+COMP2121_1C,Discrete mathematics
+COMP2396_1A,Object-oriented programming and Java
+COMP3230_1A,Principles of operating systems
+COMP3230_1B,Principles of operating systems
+COMP3231_1A,Computer architecture
+COMP3258_1A,Functional programming
+COMP3270_1A,Artificial intelligence
+COMP3278_1A,Introduction to database management systems
+COMP3297_1A,Software engineering
+COMP3314_1A,Machine learning
+COMP3316_1A,Quantum information and computation
+COMP3322_1A,Modern Technologies on World Wide Web
+COMP3323_1A,Advanced database systems
+COMP3330_1A,Interactive Mobile Application Design and Programming
+COMP3340_1A,Applied Deep Learning
+COMP3351_1A,Advanced algorithm analysis
+COMP3353_1A,Bioinformatics
+COMP3355_1A,Cyber Security
+COMP3356_1A,Robotics
+COMP1117_2B,Computer programming
+COMP2113_2D,Programming technologies
+COMP2113_2E,Programming technologies
+COMP2119_2B,Introduction to data structures and algorithms
+COMP2119_2C,Introduction to data structures and algorithms
+COMP2120_2A,Computer organization
+COMP2120_2B,Computer organization
+COMP2396_2B,Object-oriented programming and Java
+COMP3234_2A,Computer and communication networks
+COMP3234_2B,Computer and communication networks
+COMP3250_2A,Design and analysis of algorithms
+COMP3250_2B,Design and analysis of algorithms
+COMP3259_2A,Principles of programming languages
+COMP3270_2B,Artificial intelligence
+COMP3271_2A,Computer graphics
+COMP3278_2B,Introduction to database management systems
+COMP3297_2B,Software engineering
+COMP3311_2A,Legal aspects of computing
+COMP3314_2B,Machine learning
+COMP3317_2A,Computer vision
+COMP3320_2A,Electronic commerce technology
+COMP3322_2B,Modern Technologies on World Wide Web
+COMP3329_2A,Computer game design and programming
+COMP3357_2A,Cryptography
+COMP3358_2A,Distributed and Parallel Computing
+COMP3359_2A,Artificial Intelligence Applications
+COMP3403_2A,"Implementation, testing and maintenance of software systems"
