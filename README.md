@@ -4,7 +4,7 @@ Face recognition using python and mysql.
 
 *******
 
-## Useage
+## Usage
 
 ### Environment
 
@@ -13,6 +13,12 @@ Create virtual environment using Anaconda.
 conda create -n face python=3.x
 conda activate face
 pip install -r requirements.txt
+```
+
+### Extract model
+
+```
+tar -xvzf train.tar.gz
 ```
 
 ### MySQL Install
