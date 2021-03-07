@@ -8,7 +8,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 image_dir = os.path.join(BASE_DIR, "data")
 
 # Load the OpenCV face recognition detector Haar
-face_cascade = cv2.CascadeClassifier('haarcascade/haarcascade_frontalface_default.xml')
+face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 # Create OpenCV LBPH recognizer for training
 recognizer = cv2.face.LBPHFaceRecognizer_create()
 
