@@ -20,6 +20,9 @@
    <string>Information</string>
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
+   <property name="sizeConstraint">
+    <enum>QLayout::SetMinimumSize</enum>
+   </property>
    <item>
     <widget class="QTextBrowser" name="info_of_student"/>
    </item>

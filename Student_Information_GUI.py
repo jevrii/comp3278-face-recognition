@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'Student_Information.ui'
+# Form implementation generated from reading ui file 'Student_Information_GUI.ui'
 #
 # Created by: PyQt5 UI code generator 5.15.2
 #
@@ -16,28 +16,31 @@ class Ui_Form(object):
         Form.setObjectName("Form")
         Form.resize(600, 450)
         Form.setMaximumSize(QtCore.QSize(600, 450))
+        self.verticalLayout = QtWidgets.QVBoxLayout(Form)
+        self.verticalLayout.setSizeConstraint(QtWidgets.QLayout.SetMinimumSize)
+        self.verticalLayout.setObjectName("verticalLayout")
+        self.info_of_student = QtWidgets.QTextBrowser(Form)
+        self.info_of_student.setObjectName("info_of_student")
+        self.verticalLayout.addWidget(self.info_of_student)
         self.sendtoemail = QtWidgets.QCheckBox(Form)
-        self.sendtoemail.setGeometry(QtCore.QRect(25, 375, 191, 20))
         font = QtGui.QFont()
         font.setPointSize(11)
         self.sendtoemail.setFont(font)
         self.sendtoemail.setObjectName("sendtoemail")
+        self.verticalLayout.addWidget(self.sendtoemail)
         self.okay_info = QtWidgets.QPushButton(Form)
-        self.okay_info.setGeometry(QtCore.QRect(150, 400, 90, 30))
         self.okay_info.setObjectName("okay_info")
+        self.verticalLayout.addWidget(self.okay_info)
         self.cancel_info = QtWidgets.QPushButton(Form)
-        self.cancel_info.setGeometry(QtCore.QRect(360, 400, 90, 30))
         self.cancel_info.setObjectName("cancel_info")
-        self.info_of_student = QtWidgets.QTextBrowser(Form)
-        self.info_of_student.setGeometry(QtCore.QRect(25, 20, 550, 350))
-        self.info_of_student.setObjectName("info_of_student")
+        self.verticalLayout.addWidget(self.cancel_info)
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Form", "Information"))
         self.sendtoemail.setText(_translate("Form", "Send Information to Email"))
         self.okay_info.setText(_translate("Form", "Okay"))
         self.cancel_info.setText(_translate("Form", "Cancel"))
