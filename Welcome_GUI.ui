@@ -48,9 +48,9 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>300</x>
+     <x>0</x>
      <y>30</y>
-     <width>200</width>
+     <width>800</width>
      <height>100</height>
     </rect>
    </property>
@@ -75,9 +75,9 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>150</x>
+     <x>0</x>
      <y>120</y>
-     <width>500</width>
+     <width>800</width>
      <height>250</height>
     </rect>
    </property>
@@ -93,13 +93,16 @@
     </font>
    </property>
    <property name="text">
-    <string>Please make sure your face is not obstructed, then press the &quot;Okay&quot; button.</string>
+    <string>Please show your face.</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
    <property name="wordWrap">
     <bool>true</bool>
+   </property>
+   <property name="openExternalLinks">
+    <bool>false</bool>
    </property>
   </widget>
  </widget>
