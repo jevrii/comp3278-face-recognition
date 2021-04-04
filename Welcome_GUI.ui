@@ -6,26 +6,26 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>250</height>
+    <width>800</width>
+    <height>500</height>
    </rect>
   </property>
-  <property name="maximumSize">
+  <property name="minimumSize">
    <size>
-    <width>400</width>
-    <height>250</height>
+    <width>0</width>
+    <height>0</height>
    </size>
   </property>
   <property name="windowTitle">
-   <string>Form</string>
+   <string>Welcome</string>
   </property>
   <widget class="QPushButton" name="OkayButton_Welcome">
    <property name="geometry">
     <rect>
-     <x>100</x>
-     <y>180</y>
-     <width>75</width>
-     <height>23</height>
+     <x>200</x>
+     <y>410</y>
+     <width>100</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -35,10 +35,10 @@
   <widget class="QPushButton" name="CancelButton_Welcome">
    <property name="geometry">
     <rect>
-     <x>225</x>
-     <y>180</y>
-     <width>75</width>
-     <height>23</height>
+     <x>490</x>
+     <y>410</y>
+     <width>100</width>
+     <height>50</height>
     </rect>
    </property>
    <property name="text">
@@ -48,15 +48,21 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>155</x>
-     <y>40</y>
-     <width>90</width>
-     <height>21</height>
+     <x>300</x>
+     <y>30</y>
+     <width>200</width>
+     <height>100</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="font">
     <font>
-     <pointsize>15</pointsize>
+     <pointsize>35</pointsize>
     </font>
    </property>
    <property name="text">
@@ -69,15 +75,21 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>75</x>
-     <y>80</y>
-     <width>250</width>
-     <height>71</height>
+     <x>150</x>
+     <y>120</y>
+     <width>500</width>
+     <height>250</height>
     </rect>
+   </property>
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
    </property>
    <property name="font">
     <font>
-     <pointsize>13</pointsize>
+     <pointsize>30</pointsize>
     </font>
    </property>
    <property name="text">
