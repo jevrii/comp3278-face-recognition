@@ -10,6 +10,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.setupUi(self)
         self.okay_info.clicked.connect(self.email)
         self.cancel_info.clicked.connect(self.close)
+        # self.textBrowser.append('<a href = http://google.com>Google</a>')
     def email(self):
         # if student has class within one hour:
         #   self.textBrowser.append()
