@@ -1,5 +1,6 @@
 import sys
-import yagmail
+import smtplib
+import email
 from PyQt5 import QtCore, QtWidgets
 from Student_Information_GUI import Ui_Form
 
@@ -15,9 +16,14 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         # else:
         #   self.textBrowser.append()
         if self.sendtoemail.isChecked():
-            # info_email = yagmail.SMTP()
-            # contents = []
-            # info_email.send('to email', 'Course Information', contents)
+            # sent_msg = email.message.EmailMessage()
+            # sent_msg.set_content()
+            # sent_msg['Subject'] = 
+            # sent_msg['From'] =
+            # sent_msg['To'] =
+            # smtp_server = smtplib.SMTP('mail.cs.hku.hk')
+            # smtp_server.send_message(sent_msg)
+            # smtp_server.quit()
             pass
         self.close()
 
