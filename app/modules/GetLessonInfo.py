@@ -10,13 +10,14 @@ class GetLessonInfo:
 
     def get_info(self, input_list):
         mycursor = self.conn.cursor(dictionary=True)
+        d = {}
         mycursor.execute(mycursor.execute("SELECT C.course_name, C.course_code,L.venue,L.zoom_link,CM.material_name,CM.material_link\
                                            FROM Course AS C, Lesson AS L, CourseMaterial AS CM\
                                            WHERE L.course_code = C.course_code \
                                                AND L.course_code = %s AND start_datetime = %s", input_list))
-        # for row in mycursor:
-        #     print("course_name",row['course_name'])
-        return mycursor
+        for row in mycursor:
+            d = row
+        return d
 
     def test(self):
         print("hi")
