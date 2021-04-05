@@ -75,9 +75,9 @@
   <widget class="QLabel" name="label_2">
    <property name="geometry">
     <rect>
-     <x>0</x>
+     <x>50</x>
      <y>120</y>
-     <width>800</width>
+     <width>700</width>
      <height>250</height>
     </rect>
    </property>
@@ -93,7 +93,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Please show your face.</string>
+    <string>Please make sure your face is not obstructed, then press the &quot;Okay&quot; button.</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>

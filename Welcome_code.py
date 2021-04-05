@@ -13,6 +13,7 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         self.p.start("python3", ['faces.py'])
         self.p.waitForFinished(1000)
 
+QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
 app = QtWidgets.QApplication(sys.argv)
 w = WelcomeWindow()
 w.show()
