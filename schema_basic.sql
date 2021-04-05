@@ -20,26 +20,19 @@ SET time_zone = "+00:00";
 -- Database: `facerecognition`
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table `Student`
---
-DROP TABLE IF EXISTS `Student`;
-
 # Create TABLE 'Student'
 CREATE TABLE `Student` (
   `student_id` varchar(50) NOT NULL,
   `name` varchar(50) NOT NULL,
   `login_datetime` datetime NOT NULL,
   `email_address` varchar(100) NOT NULL,
-  PRIMARY KEY (student_id),
+  PRIMARY KEY (student_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Course` (
   `course_name` varchar(50) NOT NULL,
   `course_code` varchar(50) NOT NULL,
-  PRIMARY KEY (course_code),
+  PRIMARY KEY (course_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Lesson` (
@@ -50,8 +43,8 @@ CREATE TABLE `Lesson` (
   `venue` varchar(50) NOT NULL,
   `type` varchar(50) NOT NULL,
   `teacher` varchar(50) NOT NULL,
-  PRIMARY KEY (course_code),
-  FOREIGN KEY (course_code) REFERENCES Course (course_code)
+  PRIMARY KEY (course_code)
+  -- FOREIGN KEY (course_code) REFERENCES Course (course_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 
@@ -60,32 +53,17 @@ CREATE TABLE `CourseMaterial` (
   `course_code` varchar(50) NOT NULL,
   `material_name` varchar(50) NOT NULL,
   `material_link` varchar(100) NOT NULL,
-  PRIMARY KEY (material_id,course_code),
-  FOREIGN KEY (course_code) REFERENCES Course (course_code)
+  PRIMARY KEY (material_id,course_code)
+  -- FOREIGN KEY (course_code) REFERENCES Course (course_code)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `Enroll` (
   `course_code` varchar(50) NOT NULL,
   `student_id` varchar(50) NOT NULL,
-  PRIMARY KEY (course_code,student_id),
-  CONSTRAINT `Enroll_course` 
-	FOREIGN KEY (course_code) REFERENCES Course (course_code),
-  CONSTRAINT `Enroll_student` 
-	FOREIGN KEY (student_id) REFERENCES Student (student_id)
+  PRIMARY KEY (course_code,student_id)
+	-- FOREIGN KEY (course_code) REFERENCES Course (course_code),
+	-- FOREIGN KEY (student_id) REFERENCES Student (student_id)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-
-LOCK TABLES `Student` WRITE;
-/*!40000 ALTER TABLE `Student` DISABLE KEYS */;
-INSERT INTO `Student` VALUES (1, "JACK", NOW(), '2021-01-20');
-/*!40000 ALTER TABLE `Student` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Create TABLE 'Course'
-# Create TABLE 'Classroom'
-# Create other TABLE...
-
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
