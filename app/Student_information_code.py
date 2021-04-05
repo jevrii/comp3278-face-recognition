@@ -10,6 +10,10 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.okay_info.clicked.connect(self.email)
         self.cancel_info.clicked.connect(self.close)
     def email(self):
+        # if student has class within one hour:
+        #   self.textBrowser.append()
+        # else:
+        #   self.textBrowser.append()
         if self.sendtoemail.isChecked():
             # info_email = yagmail.SMTP()
             # contents = []

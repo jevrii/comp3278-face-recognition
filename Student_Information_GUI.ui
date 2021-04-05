@@ -35,6 +35,9 @@
      <height>420</height>
     </rect>
    </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
+   </property>
   </widget>
   <widget class="QCheckBox" name="sendtoemail">
    <property name="geometry">

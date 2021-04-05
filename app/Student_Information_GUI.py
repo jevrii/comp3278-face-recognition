@@ -20,6 +20,7 @@ class Ui_Form(object):
         self.cancel_info.setObjectName("cancel_info")
         self.textBrowser = QtWidgets.QTextBrowser(Form)
         self.textBrowser.setGeometry(QtCore.QRect(10, 10, 780, 420))
+        self.textBrowser.setOpenExternalLinks(True)
         self.textBrowser.setObjectName("textBrowser")
         self.sendtoemail = QtWidgets.QCheckBox(Form)
         self.sendtoemail.setGeometry(QtCore.QRect(10, 435, 111, 20))
