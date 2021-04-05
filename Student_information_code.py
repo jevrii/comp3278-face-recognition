@@ -13,6 +13,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
             pass
         self.close()
 
+QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
 app = QtWidgets.QApplication(sys.argv)
 w = InfoWindow()
 w.show()
