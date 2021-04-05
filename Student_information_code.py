@@ -1,9 +1,9 @@
 import sys
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from Student_Information_GUI import Ui_Form
 
 class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
-    def __init__(self, parent = None):
+    def __init__(self):
         super(InfoWindow, self).__init__()
         self.setupUi(self)
         self.okay_info.clicked.connect(self.email)
@@ -15,7 +15,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 
 QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
 app = QtWidgets.QApplication(sys.argv)
-w = InfoWindow()
-w.show()
+info_window = InfoWindow()
+info_window.show()
 sys.exit(app.exec_())
         
