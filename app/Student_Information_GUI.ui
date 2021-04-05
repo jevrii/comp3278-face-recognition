@@ -6,53 +6,70 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>600</width>
-    <height>450</height>
+    <width>800</width>
+    <height>500</height>
    </rect>
-  </property>
-  <property name="maximumSize">
-   <size>
-    <width>600</width>
-    <height>450</height>
-   </size>
   </property>
   <property name="windowTitle">
    <string>Information</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout">
-   <property name="sizeConstraint">
-    <enum>QLayout::SetMinimumSize</enum>
+  <widget class="QPushButton" name="cancel_info">
+   <property name="geometry">
+    <rect>
+     <x>500</x>
+     <y>460</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
    </property>
-   <item>
-    <widget class="QTextBrowser" name="info_of_student"/>
-   </item>
-   <item>
-    <widget class="QCheckBox" name="sendtoemail">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-      </font>
-     </property>
-     <property name="text">
-      <string>Send Information to Email</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="okay_info">
-     <property name="text">
-      <string>Okay</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QPushButton" name="cancel_info">
-     <property name="text">
-      <string>Cancel</string>
-     </property>
-    </widget>
-   </item>
-  </layout>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+  </widget>
+  <widget class="QTextBrowser" name="textBrowser">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>10</y>
+     <width>780</width>
+     <height>420</height>
+    </rect>
+   </property>
+   <property name="openExternalLinks">
+    <bool>true</bool>
+   </property>
+  </widget>
+  <widget class="QCheckBox" name="sendtoemail">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>435</y>
+     <width>111</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>Send to Email</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="okay_info">
+   <property name="geometry">
+    <rect>
+     <x>225</x>
+     <y>460</y>
+     <width>75</width>
+     <height>23</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Okay</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
