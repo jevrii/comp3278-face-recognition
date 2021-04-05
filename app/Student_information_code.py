@@ -1,4 +1,5 @@
 import sys
+import yagmail
 from PyQt5 import QtCore, QtWidgets
 from Student_Information_GUI import Ui_Form
 
@@ -10,6 +11,9 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.cancel_info.clicked.connect(self.close)
     def email(self):
         if self.sendtoemail.isChecked():
+            # info_email = yagmail.SMTP()
+            # contents = []
+            # info_email.send('to email', 'Course Information', contents)
             pass
         self.close()
 
