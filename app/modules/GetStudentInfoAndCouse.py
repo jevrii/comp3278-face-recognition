@@ -1,7 +1,33 @@
-# input: student_id, timestamp
-# return: name, email, lesson_id(list)
+'''
+When a student login with his/her face, his/her information such as name, login time,
+and welcome message will be presented in the graphics user interface (GUI).
 
-# If the student has class within one hour, the corresponding course information, classroom address
-# teacher’s message, links of Zoom, tutorial/lecture notes, other course materials and so on and so
-# forth will be presented in the GUI. The student could click the links to redirect to Zoom or other materials.
-# The GUI should also allow the student to send the above information to his/her email address by email.
+input: [student_id]
+output: {name, email, lessons[(course_code, datetime)]}
+'''
+
+import mysql.connector
+import password
+
+class GetStudentInfoAndCouse:
+    def __init__(self):
+        self.conn = mysql.connector.connect(host="localhost", user="root", passwd=password.secret, database="face_recognition")
+        self.cursor = self.conn.cursor()
+    def get_info(self, student_id, timestamp):
+        ret = {}
+        select = f"SELECT name, email_address FROM Student WHERE student_id=\"{student_id}\""
+        self.cursor.execute(select)
+        result = self.cursor.fetchall()
+
+        ret['name'] = result[0][0]
+        ret['email'] = result[0][1]
+
+        select = f"SELECT course_code, start_datetime from Lesson where course_code in\
+                        (SELECT course_code from Enroll where student_id={student_id})\
+                        and start_datetime BETWEEN '{timestamp}' AND date_add('{timestamp}', interval 1 hour)"
+        self.cursor.execute(select)
+        result = self.cursor.fetchall()
+
+        ret['lessons'] = result
+        
+        return ret
