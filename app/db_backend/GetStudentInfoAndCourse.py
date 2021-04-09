@@ -7,11 +7,10 @@ output: {name, email, lessons[(course_code, datetime)]}
 '''
 
 import mysql.connector
-import password
 
-class GetStudentInfoAndCouse:
+class GetStudentInfoAndCourse:
     def __init__(self):
-        self.conn = mysql.connector.connect(host="localhost", user="root", passwd=password.secret, database="face_recognition")
+        self.conn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="face_recognition")
         self.cursor = self.conn.cursor()
     def get_info(self, student_id, timestamp):
         ret = {}

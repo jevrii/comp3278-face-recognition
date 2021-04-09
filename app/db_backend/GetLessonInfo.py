@@ -9,7 +9,7 @@ output: {course_name, course_code, venue, zoom_link, material_name, material_lin
 
 class GetLessonInfo:
     def __init__(self):
-        self.conn = mysql.connector.connect(host="localhost", user="root", passwd="1234", database="face_recognition")
+        self.conn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="face_recognition")
 
     def get_info(self, input_list):
         mycursor = self.conn.cursor(dictionary=True)
