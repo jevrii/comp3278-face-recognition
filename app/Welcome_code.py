@@ -16,12 +16,12 @@ try:
 except:
     pyqt5 = False
 if pyqt5:
-    from PyQt5.QtCore import QTimer, QPoint, pyqtSignal
+    from PyQt5.QtCore import QTimer, QPoint, pyqtSignal, QCoreApplication
     from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLabel
     from PyQt5.QtWidgets import QWidget, QAction, QVBoxLayout, QHBoxLayout
     from PyQt5.QtGui import QFont, QPainter, QImage, QTextCursor
 else:
-    from PyQt4.QtCore import Qt, pyqtSignal, QTimer, QPoint
+    from PyQt4.QtCore import Qt, pyqtSignal, QTimer, QPoint, QCoreApplication
     from PyQt4.QtGui import QApplication, QMainWindow, QTextEdit, QLabel
     from PyQt4.QtGui import QWidget, QAction, QVBoxLayout, QHBoxLayout
     from PyQt4.QtGui import QFont, QPainter, QImage, QTextCursor
@@ -30,13 +30,15 @@ try:
 except:
     import queue as Queue
 
+from cv_backend import FaceRecognition
+import time
+
 IMG_SIZE    = 640,480          # 640,480 or 1280,720 or 1920,1080
 IMG_FORMAT  = QImage.Format_RGB888
 DISP_SCALE  = 2                # Scaling factor for display image
 DISP_MSEC   = 50                # Delay between display cycles
 CAP_API     = cv2.CAP_ANY       # API: CAP_ANY or CAP_DSHOW etc...
 EXPOSURE    = 0                 # Zero for automatic exposure
-TEXT_FONT   = QFont("Courier", 10)
 
 camera_num  = 1                 # Default camera (first in list)
 image_queue = Queue.Queue()     # Queue to hold images
@@ -69,10 +71,18 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self):
         super(WelcomeWindow, self).__init__()
         self.setupUi(self)
-        self.OkayButton_Welcome.clicked.connect(self.faces)
+        self.OkayButton_Welcome.clicked.connect(self.face_login)
+        self.OkayButton_Welcome_2.clicked.connect(self.text_login)
         self._new_window = None
-    def faces(self):
-        self._new_window = InfoWindow('177013', '2020-01-13 15:30')
+        self.f = FaceRecognition()
+        self.id_detected = None
+        self.name_detected = "177013" # temp hardcode
+        self.last_face_time = 0.0
+    def face_login(self):
+        self._new_window = InfoWindow(self.id_detected, '2020-01-13 15:30')
+        self._new_window.show()
+    def text_login(self):
+        self._new_window = InfoWindow(self.textEdit.toPlainText(), '2020-01-13 15:30')
         self._new_window.show()
     
     # Start image capture & display
@@ -92,6 +102,18 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
             if image is not None and len(image) > 0:
                 img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
                 self.display_image(img, display, scale)
+                try:
+                    self.id_detected = self.f.get_id(image)
+                    _translate = QCoreApplication.translate
+                    if self.id_detected is None:
+                        if time.time() - self.last_face_time > 5: # timeout
+                            self.label_2.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:10pt;\">No valid face detected.</span></p></body></html>"))
+                    else:
+                        self.last_face_time = time.time()
+                        self.label_2.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:10pt;\">Hello, {self.id_detected}</span></p></body></html>"))
+                    
+                except:
+                    print("Error occurred with face recognition")
 
     # Display an image, reduce size if required
     def display_image(self, img, display, scale=1):
