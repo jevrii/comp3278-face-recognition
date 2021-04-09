@@ -22,36 +22,23 @@
   <widget class="QPushButton" name="OkayButton_Welcome">
    <property name="geometry">
     <rect>
-     <x>200</x>
-     <y>410</y>
-     <width>100</width>
+     <x>630</x>
+     <y>370</y>
+     <width>151</width>
      <height>50</height>
     </rect>
    </property>
    <property name="text">
-    <string>Okay</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="CancelButton_Welcome">
-   <property name="geometry">
-    <rect>
-     <x>490</x>
-     <y>410</y>
-     <width>100</width>
-     <height>50</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Cancel</string>
+    <string>Continue (facial recognition)</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>0</x>
-     <y>30</y>
-     <width>800</width>
-     <height>100</height>
+     <x>100</x>
+     <y>20</y>
+     <width>611</width>
+     <height>121</height>
     </rect>
    </property>
    <property name="sizePolicy">
@@ -66,43 +53,33 @@
     </font>
    </property>
    <property name="text">
-    <string>Welcome!</string>
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Welcome!&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-size:16pt;&quot;&gt;Please scan your face, or enter your student ID&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <property name="alignment">
     <set>Qt::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QPushButton" name="OkayButton_Welcome_2">
    <property name="geometry">
     <rect>
-     <x>50</x>
-     <y>120</y>
-     <width>700</width>
-     <height>250</height>
+     <x>630</x>
+     <y>430</y>
+     <width>151</width>
+     <height>50</height>
     </rect>
    </property>
-   <property name="sizePolicy">
-    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
-     <horstretch>0</horstretch>
-     <verstretch>0</verstretch>
-    </sizepolicy>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>30</pointsize>
-    </font>
-   </property>
    <property name="text">
-    <string>Please make sure your face is not obstructed, then press the &quot;Okay&quot; button.</string>
+    <string>Continue (manual input)</string>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignCenter</set>
-   </property>
-   <property name="wordWrap">
-    <bool>true</bool>
-   </property>
-   <property name="openExternalLinks">
-    <bool>false</bool>
+  </widget>
+  <widget class="QWidget" name="camera_display" native="true">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>140</y>
+     <width>471</width>
+     <height>311</height>
+    </rect>
    </property>
   </widget>
  </widget>
