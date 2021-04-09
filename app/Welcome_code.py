@@ -79,10 +79,10 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         self.name_detected = "177013" # temp hardcode
         self.last_face_time = 0.0
     def face_login(self):
-        self._new_window = InfoWindow(self.id_detected, '2020-01-13 15:30')
+        self._new_window = InfoWindow(self.id_detected, '2020-09-04 15:30')
         self._new_window.show()
     def text_login(self):
-        self._new_window = InfoWindow(self.textEdit.toPlainText(), '2020-01-13 15:30')
+        self._new_window = InfoWindow(self.textEdit.toPlainText(), '2020-09-04 15:30')
         self._new_window.show()
     
     # Start image capture & display

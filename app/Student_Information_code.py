@@ -52,7 +52,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         else:
             text += "You do not have lessons in 1 hour:\n"
             text += "Your timetable for this week:\n"
-            week_info = db_backend.GenerateTimetable().get_timetable(student_id)
+            week_info = db_backend.GenerateTimetable().get_timetable(student_id, timestamp)
             text += str(week_info)
 
         self.message = text

@@ -10,13 +10,14 @@ class GenerateTimetable:
     def __init__(self):
         self.conn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="face_recognition")
     
-    def get_timetable(self,input_list):
+    def get_timetable(self, student_id, timestamp):
         mycursor = self.conn.cursor(dictionary=True)
         d = []
-        mycursor.execute("SELECT C.course_name, C.course_code,\
+        mycursor.execute(f"SELECT C.course_name, C.course_code,\
                                             L.venue,L.type,L.start_datetime,L.end_datetime\
                                             FROM Enroll AS E, Course AS C, Lesson AS L\
-                                            WHERE E.student_id = %s AND C.course_code = E.course_code"%input_list)        
+                                            WHERE E.student_id = {student_id} AND C.course_code = E.course_code \
+                                            AND Week(L.start_datetime) = Week(\"{timestamp}\")")        
         for row in mycursor:
             d.append(row)
         return d
