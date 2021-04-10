@@ -27,7 +27,7 @@ cap = cv2.VideoCapture(0)
 # 3 Open the camera and start face recognition
 while True:
     ret, frame = cap.read()
-    print(frame)
+    # print(frame)
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     faces = face_cascade.detectMultiScale(gray, scaleFactor=1.5, minNeighbors=5)
 
@@ -39,7 +39,7 @@ while True:
         id_, conf = recognizer.predict(roi_gray)
 
         # If the face is recognized
-        if conf >= 60:
+        if conf >= 40:
             # print(id_)
             # print(labels[id_])
             font = cv2.QT_FONT_NORMAL

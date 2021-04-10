@@ -7,28 +7,12 @@ from Student_Information_code import InfoWindow
 # Copyright (c) Jeremy P Bentham 2019
 # Please credit iosoft.blog if you use the information or software in it
 
-VERSION = "Cam_display v0.10"
-
 import sys, time, threading, cv2
-try:
-    from PyQt5.QtCore import Qt
-    pyqt5 = True
-except:
-    pyqt5 = False
-if pyqt5:
-    from PyQt5.QtCore import QTimer, QPoint, pyqtSignal, QCoreApplication
-    from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLabel
-    from PyQt5.QtWidgets import QWidget, QAction, QVBoxLayout, QHBoxLayout
-    from PyQt5.QtGui import QFont, QPainter, QImage, QTextCursor
-else:
-    from PyQt4.QtCore import Qt, pyqtSignal, QTimer, QPoint, QCoreApplication
-    from PyQt4.QtGui import QApplication, QMainWindow, QTextEdit, QLabel
-    from PyQt4.QtGui import QWidget, QAction, QVBoxLayout, QHBoxLayout
-    from PyQt4.QtGui import QFont, QPainter, QImage, QTextCursor
-try:
-    import Queue as Queue
-except:
-    import queue as Queue
+from PyQt5.QtCore import QTimer, QPoint, pyqtSignal, QCoreApplication
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLabel
+from PyQt5.QtWidgets import QWidget, QAction, QVBoxLayout, QHBoxLayout
+from PyQt5.QtGui import QFont, QPainter, QImage, QTextCursor
+import queue as Queue
 
 from cv_backend import FaceRecognition
 import time
@@ -100,8 +84,6 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         if not imageq.empty():
             image = imageq.get()
             if image is not None and len(image) > 0:
-                img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
-                self.display_image(img, display, scale)
                 try:
                     self.id_detected = self.f.get_id(image)
                     _translate = QCoreApplication.translate
@@ -111,9 +93,11 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
                     else:
                         self.last_face_time = time.time()
                         self.label_2.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:10pt;\">Hello, {self.id_detected}</span></p></body></html>"))
-                    
                 except:
                     print("Error occurred with face recognition")
+                
+                img = cv2.cvtColor(image, cv2.COLOR_BGR2RGB)
+                self.display_image(img, display, scale)
 
     # Display an image, reduce size if required
     def display_image(self, img, display, scale=1):

@@ -9,22 +9,10 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-
-try:
-    from PyQt5.QtCore import Qt
-    pyqt5 = True
-except:
-    pyqt5 = False
-if pyqt5:
-    from PyQt5.QtCore import QTimer, QPoint, pyqtSignal
-    from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLabel
-    from PyQt5.QtWidgets import QWidget, QAction, QVBoxLayout, QHBoxLayout
-    from PyQt5.QtGui import QFont, QPainter, QImage, QTextCursor
-else:
-    from PyQt4.QtCore import Qt, pyqtSignal, QTimer, QPoint
-    from PyQt4.QtGui import QApplication, QMainWindow, QTextEdit, QLabel
-    from PyQt4.QtGui import QWidget, QAction, QVBoxLayout, QHBoxLayout
-    from PyQt4.QtGui import QFont, QPainter, QImage, QTextCursor
+from PyQt5.QtCore import QTimer, QPoint, pyqtSignal, QCoreApplication
+from PyQt5.QtWidgets import QApplication, QMainWindow, QTextEdit, QLabel
+from PyQt5.QtWidgets import QWidget, QAction, QVBoxLayout, QHBoxLayout
+from PyQt5.QtGui import QFont, QPainter, QImage, QTextCursor
 
 # Image widget
 class ImageWidget(QtWidgets.QWidget):

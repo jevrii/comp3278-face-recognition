@@ -29,18 +29,24 @@ class FaceRecognition:
             # predict the id and confidence for faces
             id_, conf = self.recognizer.predict(roi_gray)
 
+            color = (255, 0, 0)
+            stroke = 2
+            font = cv2.QT_FONT_NORMAL
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), (2))
+
             # If the face is recognized
             if conf >= 40:
                 # print(id_)
                 # print(labels[id_])
                 font = cv2.QT_FONT_NORMAL
                 name = self.labels[id_]
-                print(name)
+                cv2.putText(frame, name, (x, y), font, 1, color, stroke, cv2.LINE_AA)
 
                 return name
 
             # If the face is unrecognized
             else: 
+                cv2.putText(frame, "UNKNOWN", (x, y), font, 1, color, stroke, cv2.LINE_AA)
                 # color = (255, 0, 0)
                 # stroke = 2
                 # font = cv2.QT_FONT_NORMAL

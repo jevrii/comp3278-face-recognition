@@ -150,3 +150,5 @@ cython_debug/
 
 # model stuff
 data/
+train.yml
+vocaloid
