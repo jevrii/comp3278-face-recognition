@@ -11,20 +11,20 @@ import mysql.connector
 class GetStudentInfoAndCourse:
     def __init__(self):
         self.conn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="face_recognition")
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(prepared=True)
     def get_info(self, student_id, timestamp):
         ret = {}
-        select = f"SELECT name, email_address FROM Student WHERE student_id=\"{student_id}\""
-        self.cursor.execute(select)
+        select = "SELECT name, email_address FROM Student WHERE student_id=%s"
+        self.cursor.execute(select, (student_id,))
         result = self.cursor.fetchall()
 
         ret['name'] = result[0][0]
         ret['email'] = result[0][1]
 
-        select = f"SELECT course_code, start_datetime from Lesson where course_code in\
-                        (SELECT course_code from Enroll where student_id={student_id})\
-                        and start_datetime BETWEEN '{timestamp}' AND date_add('{timestamp}', interval 1 hour)"
-        self.cursor.execute(select)
+        select = "SELECT course_code, start_datetime from Lesson where course_code in\
+                        (SELECT course_code from Enroll where student_id=%s)\
+                        and start_datetime BETWEEN %s AND date_add(%s, interval 1 hour)"
+        self.cursor.execute(select, (student_id, timestamp, timestamp))
         result = self.cursor.fetchall()
 
         ret['lessons'] = result
