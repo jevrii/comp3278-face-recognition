@@ -66,7 +66,7 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         self._new_window = InfoWindow(self.id_detected, '2020-09-04 15:30')
         self._new_window.show()
     def text_login(self):
-        self._new_window = InfoWindow(self.textEdit.toPlainText(), '2020-09-04 15:30')
+        self._new_window = InfoWindow(self.lineEdit.text(), '2020-09-04 15:30')
         self._new_window.show()
     
     # Start image capture & display

@@ -22,9 +22,9 @@
   <widget class="QPushButton" name="OkayButton_Welcome">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>600</x>
      <y>370</y>
-     <width>151</width>
+     <width>181</width>
      <height>50</height>
     </rect>
    </property>
@@ -62,9 +62,9 @@
   <widget class="QPushButton" name="OkayButton_Welcome_2">
    <property name="geometry">
     <rect>
-     <x>630</x>
+     <x>600</x>
      <y>430</y>
-     <width>151</width>
+     <width>181</width>
      <height>50</height>
     </rect>
    </property>
@@ -95,16 +95,6 @@
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;No valid face detected.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>610</x>
-     <y>260</y>
-     <width>181</width>
-     <height>41</height>
-    </rect>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_3">
    <property name="geometry">
     <rect>
@@ -116,6 +106,21 @@
    </property>
    <property name="text">
     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-size:10pt;&quot;&gt;Manual SID input:&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="lineEdit">
+   <property name="geometry">
+    <rect>
+     <x>610</x>
+     <y>270</y>
+     <width>181</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>11</pointsize>
+    </font>
    </property>
   </widget>
  </widget>
