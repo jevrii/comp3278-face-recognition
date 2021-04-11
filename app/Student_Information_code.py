@@ -34,7 +34,7 @@ class MaterialWidget(QtWidgets.QWidget):
 
         label_name = QtWidgets.QLabel(f"{name}")
         label_name.setFixedHeight(20)
-        label_link = QtWidgets.QLabel(f"<a href=\"{link}\">Click Here</a>")
+        label_link = QtWidgets.QLabel(f"<a href=\"{link}\">{link}</a>")
         label_link.setTextFormat(QtCore.Qt.RichText)
         label_link.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
         label_link.setOpenExternalLinks(True)
@@ -86,9 +86,18 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.label.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:18pt;\">{welcome_msg}</span></p></body></html>"))
 
         if len(student_info['lessons']):
-            status1 = "You have lessons in 1 hour.\n"
-            status2 = "Class material:\n"
+            start_datetime = student_info['lessons'][0]['start_datetime']
+            end_datetime = student_info['lessons'][0]['end_datetime']
+            status1 = f"You have lessons in 1 hour - {student_info['lessons'][0]['course_code']} {start_datetime.hour}:{start_datetime.minute} - {end_datetime.hour}:{end_datetime.minute}"
+            status2 = "Class material:"
             lesson_info = db_backend.GetLessonMaterial().get_info(student_info['lessons'][0]['course_code'])
+
+            if len(student_info['lessons'][0]['zoom_link']):
+                itemN = QtWidgets.QListWidgetItem()
+                widget = MaterialWidget(name="Zoom link", link=student_info['lessons'][0]['zoom_link'])
+                itemN.setSizeHint(widget.sizeHint())
+                self.listWidget.addItem(itemN)
+                self.listWidget.setItemWidget(itemN, widget)
 
             for material in lesson_info:
                 itemN = QtWidgets.QListWidgetItem()
@@ -98,8 +107,8 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
                 self.listWidget.setItemWidget(itemN, widget)
 
         else:
-            status1 = "You do not have lessons in 1 hour.\n"
-            status2 = "Your upcoming classes:\n"
+            status1 = "You do not have lessons in 1 hour."
+            status2 = "Your upcoming classes:"
             week_info = db_backend.GenerateTimetable().get_timetable(student_id, timestamp)
 
             for lesson in week_info:
@@ -117,6 +126,6 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 if __name__ == '__main__':
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
-    info_window = InfoWindow('177013', '2020-09-03 15:30')
+    info_window = InfoWindow('177013', '2020-09-03 15:31')
     info_window.show()
     sys.exit(app.exec_())
