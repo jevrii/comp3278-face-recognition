@@ -13,11 +13,11 @@ class GenerateTimetable:
     def get_timetable(self, student_id, timestamp):
         mycursor = self.conn.cursor(dictionary=True)
         d = []
-        mycursor.execute(f"SELECT C.course_name, C.course_code,\
+        mycursor.execute("SELECT C.course_name, C.course_code,\
                             L.venue,L.type,L.start_datetime,L.end_datetime\
                             FROM Enroll AS E, Course AS C, Lesson AS L\
-                            WHERE E.student_id = {student_id} AND C.course_code = E.course_code \
-                            LIMIT 5 ORDER BY L.start_datetime")
+                            WHERE E.student_id = %s AND C.course_code = E.course_code \
+                            ORDER BY L.start_datetime LIMIT 5", (student_id,))
         for row in mycursor:
             d.append(row)
         return d
