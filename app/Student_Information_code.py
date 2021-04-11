@@ -72,7 +72,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         student_info = db_backend.GetStudentInfoAndCourse().get_info(student_id, timestamp)
         self.email = student_info['email']
 
-        cur_time = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M')
+        cur_time = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
 
         if cur_time.hour < 4:
             welcome_msg = f"Good evening, {student_info['name']}!"
@@ -82,6 +82,8 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
             welcome_msg = f"Good afternoon, {student_info['name']}!"
         else:
             welcome_msg = f"Good evening, {student_info['name']}!"
+
+        welcome_msg += " Your login time is %02d:%02d:%02d"%(cur_time.hour, cur_time.minute, cur_time.second)
 
         self.label.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:18pt;\">{welcome_msg}</span></p></body></html>"))
 
@@ -126,6 +128,6 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 if __name__ == '__main__':
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
-    info_window = InfoWindow('177013', '2020-09-03 15:31')
+    info_window = InfoWindow('177013', '2020-09-03 15:31:00')
     info_window.show()
     sys.exit(app.exec_())

@@ -15,7 +15,7 @@ from PyQt5.QtGui import QFont, QPainter, QImage, QTextCursor
 import queue as Queue
 
 from cv_backend import FaceRecognition
-import time
+import time, datetime
 
 IMG_SIZE    = 640,480          # 640,480 or 1280,720 or 1920,1080
 IMG_FORMAT  = QImage.Format_RGB888
@@ -63,10 +63,10 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         self.name_detected = "177013" # temp hardcode
         self.last_face_time = 0.0
     def face_login(self):
-        self._new_window = InfoWindow(self.id_detected, '2020-09-04 15:30')
+        self._new_window = InfoWindow(self.id_detected, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         self._new_window.show()
     def text_login(self):
-        self._new_window = InfoWindow(self.lineEdit.text(), '2020-09-04 15:30')
+        self._new_window = InfoWindow(self.lineEdit.text(), datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
         self._new_window.show()
     
     # Start image capture & display
