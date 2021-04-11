@@ -26,7 +26,25 @@ class LessonWidget(QtWidgets.QWidget):
 
         self.setLayout(widgetLayout)
 
+class MaterialWidget(QtWidgets.QWidget):
+    def __init__(self, parent=None, name="", link=""):
+        # https://stackoverflow.com/questions/26199374/add-qwidget-to-qlistwidget
+        
+        QtWidgets.QWidget.__init__(self, parent=parent)
 
+        label_name = QtWidgets.QLabel(f"{name}")
+        label_name.setFixedHeight(20)
+        label_link = QtWidgets.QLabel(f"<a href=\"{link}\">Click Here</a>")
+        label_link.setTextFormat(QtCore.Qt.RichText)
+        label_link.setTextInteractionFlags(QtCore.Qt.TextBrowserInteraction)
+        label_link.setOpenExternalLinks(True)
+        label_link.setFixedHeight(20)
+
+        widgetLayout = QtWidgets.QVBoxLayout()
+        widgetLayout.addWidget(label_name)
+        widgetLayout.addWidget(label_link)
+        widgetLayout.addStretch()
+        self.setLayout(widgetLayout)
 
 class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self, student_id, timestamp):
@@ -70,7 +88,15 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         if len(student_info['lessons']):
             status1 = "You have lessons in 1 hour.\n"
             status2 = "Class material:\n"
-            lesson_info = db_backend.GetLessonInfo().get_info(student_info['lessons'][0])
+            lesson_info = db_backend.GetLessonMaterial().get_info(student_info['lessons'][0]['course_code'])
+
+            for material in lesson_info:
+                itemN = QtWidgets.QListWidgetItem()
+                widget = MaterialWidget(name=material["material_name"], link=material["material_link"])
+                itemN.setSizeHint(widget.sizeHint())
+                self.listWidget.addItem(itemN)
+                self.listWidget.setItemWidget(itemN, widget)
+
         else:
             status1 = "You do not have lessons in 1 hour.\n"
             status2 = "Your upcoming classes:\n"
@@ -78,7 +104,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 
             for lesson in week_info:
                 itemN = QtWidgets.QListWidgetItem()
-                widget = LessonWidget(course_name=lesson["course_name"], course_code=lesson["course_name"],
+                widget = LessonWidget(course_name=lesson["course_name"], course_code=lesson["course_code"],
                                       venue=lesson["venue"], type=lesson["type"],
                                       start_datetime=lesson["start_datetime"], end_datetime=lesson["end_datetime"])
                 itemN.setSizeHint(widget.sizeHint())
@@ -91,6 +117,6 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 if __name__ == '__main__':
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
-    info_window = InfoWindow('177013', '2020-09-04 00:30')
+    info_window = InfoWindow('177013', '2020-09-03 15:30')
     info_window.show()
     sys.exit(app.exec_())
