@@ -70,6 +70,9 @@ class Ui_Form(object):
         font.setPointSize(11)
         self.lineEdit.setFont(font)
         self.lineEdit.setObjectName("lineEdit")
+        self.label_4 = QtWidgets.QLabel(Form)
+        self.label_4.setGeometry(QtCore.QRect(600, 320, 191, 41))
+        self.label_4.setObjectName("label_4")
 
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
@@ -82,3 +85,4 @@ class Ui_Form(object):
         self.OkayButton_Welcome_2.setText(_translate("Form", "Continue (manual input)"))
         self.label_2.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:10pt;\">No valid face detected.</span></p></body></html>"))
         self.label_3.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:10pt;\">Manual SID input:</span></p></body></html>"))
+        self.label_4.setText(_translate("Form", "<html><head/><body><p><br/></p></body></html>"))

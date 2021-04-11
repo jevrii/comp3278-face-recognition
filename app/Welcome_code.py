@@ -48,6 +48,7 @@ def grab_images(cam_num, queue):
         else:
             print("Error: can't grab camera image")
             break
+        welcome_window.show_image(image_queue, welcome_window.camera_display, DISP_SCALE)
     cap.release()
 
 
@@ -60,21 +61,30 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         self._new_window = None
         self.f = FaceRecognition()
         self.id_detected = None
-        self.name_detected = "177013" # temp hardcode
         self.last_face_time = 0.0
     def face_login(self):
-        self._new_window = InfoWindow(self.id_detected, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        self._new_window.show()
+        _translate = QtCore.QCoreApplication.translate
+        try:
+            self.label_4.setText(_translate("Form", "<html><head/><body><p></p></body></html>"))
+            self._new_window = InfoWindow(self.id_detected, datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            self._new_window.show()
+        except IndexError:
+            self.label_4.setText(_translate("Form", "<html><head/><body><p style=\"color:red\">Error: User not found</p></body></html>"))
     def text_login(self):
-        self._new_window = InfoWindow(self.lineEdit.text(), datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
-        self._new_window.show()
+        _translate = QtCore.QCoreApplication.translate
+        try:
+            self.label_4.setText(_translate("Form", "<html><head/><body><p></p></body></html>"))
+            self._new_window = InfoWindow(self.lineEdit.text(), datetime.datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            self._new_window.show()
+        except IndexError:
+            self.label_4.setText(_translate("Form", "<html><head/><body><p style=\"color:red\">Error: User not found</p></body></html>"))
     
     # Start image capture & display
     def start(self):
-        self.timer = QTimer(self)           # Timer to trigger display
-        self.timer.timeout.connect(lambda: 
-                    self.show_image(image_queue, self.camera_display, DISP_SCALE))
-        self.timer.start(DISP_MSEC)         
+        # self.timer = QTimer(self)           # Timer to trigger display
+        # self.timer.timeout.connect(lambda: 
+        #             self.show_image(image_queue, self.camera_display, DISP_SCALE))
+        # self.timer.start(DISP_MSEC)         
         self.capture_thread = threading.Thread(target=grab_images, 
                     args=(camera_num, image_queue))
         self.capture_thread.start()         # Thread to grab images
@@ -85,12 +95,14 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
             image = imageq.get()
             if image is not None and len(image) > 0:
                 try:
-                    self.id_detected = self.f.get_id(image)
+                    temp = self.f.get_id(image)
                     _translate = QCoreApplication.translate
-                    if self.id_detected is None:
+                    if temp is None:
                         if time.time() - self.last_face_time > 5: # timeout
+                            self.id_detected = None
                             self.label_2.setText(_translate("Form", "<html><head/><body><p><span style=\" font-size:10pt;\">No valid face detected.</span></p></body></html>"))
                     else:
+                        self.id_detected = temp
                         self.last_face_time = time.time()
                         self.label_2.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:10pt;\">Hello, {self.id_detected}</span></p></body></html>"))
                 except:
