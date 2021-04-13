@@ -48,7 +48,7 @@ def grab_images(cam_num, queue):
         else:
             print("Error: can't grab camera image")
             break
-        welcome_window.show_image(image_queue, welcome_window.camera_display, DISP_SCALE)
+        # welcome_window.show_image(image_queue, welcome_window.camera_display, DISP_SCALE)
     cap.release()
 
 
@@ -81,10 +81,10 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
     
     # Start image capture & display
     def start(self):
-        # self.timer = QTimer(self)           # Timer to trigger display
-        # self.timer.timeout.connect(lambda: 
-        #             self.show_image(image_queue, self.camera_display, DISP_SCALE))
-        # self.timer.start(DISP_MSEC)         
+        self.timer = QTimer(self)           # Timer to trigger display
+        self.timer.timeout.connect(lambda: 
+                    self.show_image(image_queue, self.camera_display, DISP_SCALE))
+        self.timer.start(DISP_MSEC)
         self.capture_thread = threading.Thread(target=grab_images, 
                     args=(camera_num, image_queue))
         self.capture_thread.start()         # Thread to grab images

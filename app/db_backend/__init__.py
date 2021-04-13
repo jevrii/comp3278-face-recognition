@@ -1,3 +1,4 @@
 from db_backend.GetStudentInfoAndCourse import GetStudentInfoAndCourse
 from db_backend.GetLessonMaterial import GetLessonMaterial
 from db_backend.GenerateTimetable import GenerateTimetable
+from db_backend.GenerateLoginLog import GenerateLoginLog

@@ -5,6 +5,7 @@ from PyQt5 import QtCore, QtWidgets, QtGui
 from Student_Information_GUI import Ui_Form
 import datetime
 import db_backend
+import uuid
 
 class LessonWidget(QtWidgets.QWidget):
     def __init__(self, parent=None, course_name="", course_code="", venue="", type="", start_datetime="", end_datetime=""):
@@ -46,6 +47,8 @@ class MaterialWidget(QtWidgets.QWidget):
         widgetLayout.addStretch()
         self.setLayout(widgetLayout)
 
+HEARTBEAT_MSEC = 5000
+
 class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self, student_id, timestamp):
         super(InfoWindow, self).__init__()
@@ -55,6 +58,16 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 
         self.fill_information(student_id, timestamp)
         self.email = None
+        self.session_id = str(uuid.uuid4())
+
+        self.session_db_handler = db_backend.GenerateLoginLog()
+
+        self.session_db_handler.login_record(student_id, self.session_id)
+
+    def start(self):
+        self.timer = QtCore.QTimer(self)           # Timer to trigger display
+        self.timer.timeout.connect(lambda: self.session_db_handler.heartbeat(self.session_id))
+        self.timer.start(HEARTBEAT_MSEC)
 
     def email(self):
         sent_msg = email.message.EmailMessage()
@@ -130,4 +143,5 @@ if __name__ == '__main__':
     app = QtWidgets.QApplication(sys.argv)
     info_window = InfoWindow('177013', '2020-09-03 15:31:00')
     info_window.show()
+    info_window.start()
     sys.exit(app.exec_())
