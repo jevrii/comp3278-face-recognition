@@ -65,7 +65,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.session_db_handler.login_record(student_id, self.session_id)
 
     def start(self):
-        self.timer = QtCore.QTimer(self)           # Timer to trigger display
+        self.timer = QtCore.QTimer(self)           # Timer to trigger heartbeat log
         self.timer.timeout.connect(lambda: self.session_db_handler.heartbeat(self.session_id))
         self.timer.start(HEARTBEAT_MSEC)
 
