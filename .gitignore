@@ -147,3 +147,8 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# model stuff
+data/
+train.yml
+vocaloid
