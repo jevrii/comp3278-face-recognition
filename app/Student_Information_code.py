@@ -50,8 +50,8 @@ class MaterialWidget(QtWidgets.QWidget):
 HEARTBEAT_MSEC = 5000
 
 class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
-    msg_html = "<html>\n"
-    msg_html += "   <body>"
+    msg_html = "<html>"
+    msg_html += "<body>"
     def __init__(self, student_id, timestamp):
         super(InfoWindow, self).__init__()
         self.setupUi(self)
@@ -153,8 +153,11 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
                 itemN.setSizeHint(widget.sizeHint())
                 self.listWidget.addItem(itemN)
                 self.listWidget.setItemWidget(itemN, widget)
-
-        InfoWindow.msg_html += "   </body>\n"
+                InfoWindow.msg_html += "<table>"
+                InfoWindow.msg_html += "<tr><th>Lesson</th><th>Course Code</th><th>Venue</th><th>Type</th><th>Start Date/Time</th><th>End Date/Time</th></tr>"
+                
+                
+        InfoWindow.msg_html += "</body>"
         InfoWindow.msg_html += "</html>"
         self.label_2.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:12pt;\">{status1}</span></p></body></html>"))
         self.label_3.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:12pt;\">{status2}</span></p></body></html>"))
