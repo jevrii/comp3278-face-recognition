@@ -141,7 +141,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 if __name__ == '__main__':
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
-    info_window = InfoWindow('177013', '2020-09-03 15:31:00')
+    info_window = InfoWindow('177013', '2020-09-03 15:00:00')
     info_window.show()
     info_window.start()
     sys.exit(app.exec_())

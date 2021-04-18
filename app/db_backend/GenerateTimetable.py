@@ -16,8 +16,9 @@ class GenerateTimetable:
         mycursor.execute("SELECT C.course_name, C.course_code,\
                             L.venue,L.type,L.start_datetime,L.end_datetime\
                             FROM Enroll AS E, Course AS C, Lesson AS L\
-                            WHERE E.student_id = %s AND C.course_code = E.course_code \
-                            ORDER BY L.start_datetime LIMIT 5", (student_id,))
+                            WHERE E.student_id = %s AND C.course_code = E.course_code AND E.course_code = L.course_code\
+                            AND L.start_datetime >= %s\
+                            ORDER BY L.start_datetime LIMIT 5", (student_id,timestamp))
         for row in mycursor:
             d.append(row)
         return d
