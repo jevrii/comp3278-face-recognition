@@ -5,18 +5,20 @@ import pyttsx3
 import pickle
 from datetime import datetime
 import sys
+import os
 
 class FaceRecognition:
     def __init__(self):
+        folder = os.path.dirname(os.path.abspath(__file__))
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
-        self.recognizer.read("cv_backend/train.yml")
+        self.recognizer.read(f"{folder}/train.yml")
 
         self.labels = {"person_name": 1}
-        with open("cv_backend/labels.pickle", "rb") as f:
+        with open(f"{folder}/labels.pickle", "rb") as f:
             self.labels = pickle.load(f)
             self.labels = {v: k for k, v in self.labels.items()}
         
-        self.face_cascade = cv2.CascadeClassifier('cv_backend/haarcascade_frontalface_default.xml')
+        self.face_cascade = cv2.CascadeClassifier(f'{folder}/haarcascade_frontalface_default.xml')
 
     def get_id(self, frame):
         gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
