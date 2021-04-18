@@ -21,7 +21,7 @@ class GetStudentInfoAndCourse:
         ret['name'] = result[0]['name']
         ret['email'] = result[0]['email_address']
 
-        select = "SELECT course_code, start_datetime, end_datetime, zoom_link from Lesson where course_code in\
+        select = "SELECT course_code, start_datetime, end_datetime, zoom_link, venue, teacher_msg from Lesson where course_code in\
                         (SELECT course_code from Enroll where student_id=%s)\
                         and ( (start_datetime BETWEEN %s AND date_add(%s, interval 1 hour)) or \
                         (%s BETWEEN start_datetime AND end_datetime) )"

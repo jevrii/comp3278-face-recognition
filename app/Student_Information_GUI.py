@@ -30,9 +30,11 @@ class Ui_Form(object):
         self.listWidget.setGeometry(QtCore.QRect(20, 180, 751, 251))
         self.listWidget.setObjectName("listWidget")
         self.label_3 = QtWidgets.QLabel(Form)
-        self.label_3.setGeometry(QtCore.QRect(20, 120, 711, 51))
+        self.label_3.setGeometry(QtCore.QRect(20, 140, 711, 51))
         self.label_3.setObjectName("label_3")
-
+        self.label_4 = QtWidgets.QLabel(Form)
+        self.label_4.setGeometry(QtCore.QRect(20, 100, 711, 51))
+        self.label_4.setObjectName("label_4")
         self.retranslateUi(Form)
         QtCore.QMetaObject.connectSlotsByName(Form)
 

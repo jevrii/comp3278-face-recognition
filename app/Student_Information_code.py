@@ -103,8 +103,9 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         if len(student_info['lessons']):
             start_datetime = student_info['lessons'][0]['start_datetime']
             end_datetime = student_info['lessons'][0]['end_datetime']
-            status1 = f"You have lessons in 1 hour - {student_info['lessons'][0]['course_code']} {start_datetime.hour}:{start_datetime.minute} - {end_datetime.hour}:{end_datetime.minute}"
+            status1 = f"You have lessons in 1 hour - {student_info['lessons'][0]['course_code']} {start_datetime.hour}:{start_datetime.minute} - {end_datetime.hour}:{end_datetime.minute}  -- Venue: {student_info['lessons'][0]['venue']}" 
             status2 = "Class material:"
+            status3 = f"Teacher's Message: {student_info['lessons'][0]['teacher_msg']}"
             lesson_info = db_backend.GetLessonMaterial().get_info(student_info['lessons'][0]['course_code'])
 
             if len(student_info['lessons'][0]['zoom_link']):
@@ -137,7 +138,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 
         self.label_2.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:12pt;\">{status1}</span></p></body></html>"))
         self.label_3.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:12pt;\">{status2}</span></p></body></html>"))
-
+        self.label_4.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:12pt;\">{status3}</span></p></body></html>"))
 if __name__ == '__main__':
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
