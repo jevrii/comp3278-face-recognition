@@ -125,6 +125,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         else:
             status1 = "You do not have lessons in 1 hour."
             status2 = "Your upcoming classes:"
+            status3 = ""
             week_info = db_backend.GenerateTimetable().get_timetable(student_id, timestamp)
 
             for lesson in week_info:
