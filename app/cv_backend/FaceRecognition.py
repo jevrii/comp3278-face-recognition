@@ -8,7 +8,7 @@ import sys
 import os
 
 class FaceRecognition:
-    def __init__(self):
+    def __init__(self, confidence):
         folder = os.path.dirname(os.path.abspath(__file__))
         self.recognizer = cv2.face.LBPHFaceRecognizer_create()
         self.recognizer.read(f"{folder}/train.yml")
@@ -18,6 +18,7 @@ class FaceRecognition:
             self.labels = pickle.load(f)
             self.labels = {v: k for k, v in self.labels.items()}
         
+        self.confidence = confidence
         self.face_cascade = cv2.CascadeClassifier(f'{folder}/haarcascade_frontalface_default.xml')
 
     def get_id(self, frame):
@@ -37,7 +38,7 @@ class FaceRecognition:
             cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), (2))
 
             # If the face is recognized
-            if conf >= 40:
+            if conf >= self.confidence:
                 # print(id_)
                 # print(labels[id_])
                 font = cv2.QT_FONT_NORMAL

@@ -16,6 +16,7 @@ import queue as Queue
 
 from cv_backend import FaceRecognition
 import time, datetime
+import os, yaml
 
 IMG_SIZE    = 640,480          # 640,480 or 1280,720 or 1920,1080
 IMG_FORMAT  = QImage.Format_RGB888
@@ -27,6 +28,9 @@ EXPOSURE    = 0                 # Zero for automatic exposure
 camera_num  = 1                 # Default camera (first in list)
 image_queue = Queue.Queue()     # Queue to hold images
 capturing   = True              # Flag to indicate capturing
+
+folder = os.path.dirname(os.path.abspath(__file__))
+config = yaml.load(open(folder+'/config.yaml', 'r'), Loader=yaml.FullLoader)
 
 # Grab images from the camera (separate thread)
 def grab_images(cam_num, queue):
@@ -59,7 +63,7 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         self.OkayButton_Welcome.clicked.connect(self.face_login)
         self.OkayButton_Welcome_2.clicked.connect(self.text_login)
         self._new_window = None
-        self.f = FaceRecognition()
+        self.f = FaceRecognition(confidence=config['face_recognition_confidence'])
         self.id_detected = None
         self.last_face_time = 0.0
     def face_login(self):
