@@ -52,14 +52,12 @@ HEARTBEAT_MSEC = 5000
 class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self, student_id, timestamp):
         super(InfoWindow, self).__init__()
-        
         self.msg_html = "<html><body>"
         self.setupUi(self)
-        self.okay_info.clicked.connect(self.email)
+        self.okay_info.clicked.connect(self.send_email)
         self.cancel_info.clicked.connect(self.close)
 
         self.fill_information(student_id, timestamp)
-        self.email = None
         self.session_id = str(uuid.uuid4())
 
         self.session_db_handler = db_backend.GenerateLoginLog()
@@ -71,7 +69,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.timer.timeout.connect(lambda: self.session_db_handler.heartbeat(self.session_id))
         self.timer.start(HEARTBEAT_MSEC)
 
-    def email(self):
+    def send_email(self):
         sent_msg = email.message.EmailMessage()
         sent_msg.set_content(self.msg_html, subtype = 'html')
         sent_msg['Subject'] = 'Lesson reminder'
@@ -85,7 +83,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         _translate = QtCore.QCoreApplication.translate
 
         student_info = db_backend.GetStudentInfoAndCourse().get_info(student_id, timestamp)
-        self.email = student_info['email']
+        self.email_address = student_info['email']
 
         cur_time = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
 
@@ -115,6 +113,9 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
             self.msg_html += "<p>" + status3 + "</p>"
             self.msg_html += "<p>" + status2 + "</p>"
 
+            self.msg_html += "<table>"
+            self.msg_html += "<tr><th>Material Name</th><th>Material Link</th></tr>"
+
             if len(student_info['lessons'][0]['zoom_link']):
                 itemN = QtWidgets.QListWidgetItem()
                 widget = MaterialWidget(name="Zoom link", link=student_info['lessons'][0]['zoom_link'])
@@ -122,10 +123,9 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
                 itemN.setSizeHint(widget.sizeHint())
                 self.listWidget.addItem(itemN)
                 self.listWidget.setItemWidget(itemN, widget)
-                self.msg_html += "<p>" + "Zoom link" + "</p>"
-                self.msg_html += "<p>" + f"<a href={link_of_zoom}>{link_of_zoom}</a>" + "</p>"
                 
-
+                self.msg_html += f'<tr><td>Zoom link</td><td><a href={link_of_zoom}>{link_of_zoom}</a></td></tr>'
+            
             for material in lesson_info:
                 itemN = QtWidgets.QListWidgetItem()
                 widget = MaterialWidget(name=material["material_name"], link=material["material_link"])
@@ -134,8 +134,10 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
                 itemN.setSizeHint(widget.sizeHint())
                 self.listWidget.addItem(itemN)
                 self.listWidget.setItemWidget(itemN, widget)
-                self.msg_html += "<p>" + name_of_material + "</p>"
-                self.msg_html += "<p>" + f"<a href={link_of_material}>{link_of_material}</a>" + "</p>"
+
+                self.msg_html += f'<tr><td>{name_of_material}</td><td><a href={link_of_material}>{link_of_material}</a></td></tr>'
+
+            self.msg_html += "</table>"
 
         else:
             status1 = "You do not have lessons in 1 hour."
@@ -145,6 +147,9 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
             self.msg_html += "<p>" + status1 + "</p>"
             self.msg_html += "<p>" + status2 + "</p>"
 
+            self.msg_html += "<table>"
+            self.msg_html += "<tr><th>Course Name</th><th>Course Code</th><th>Venue</th><th>Type</th><th>Start Date/Time</th><th>End Date/Time</th></tr>"
+
             for lesson in week_info:
                 itemN = QtWidgets.QListWidgetItem()
                 widget = LessonWidget(course_name=lesson["course_name"], course_code=lesson["course_code"],
@@ -153,10 +158,11 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
                 itemN.setSizeHint(widget.sizeHint())
                 self.listWidget.addItem(itemN)
                 self.listWidget.setItemWidget(itemN, widget)
-                self.msg_html += "<table>"
-                self.msg_html += "<tr><th>Lesson</th><th>Course Code</th><th>Venue</th><th>Type</th><th>Start Date/Time</th><th>End Date/Time</th></tr>"
+
+                self.msg_html += f'<tr><td>{lesson["course_name"]}</td><td>{lesson["course_code"]}</td><td>{lesson["venue"]}</td><td>{lesson["type"]}</td><td>{lesson["start_datetime"]}</td><td>{lesson["end_datetime"]}</td></tr>'
                 
-                
+            self.msg_html += "</table>"
+
         self.msg_html += "</body>"
         self.msg_html += "</html>"
         self.label_2.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:12pt;\">{status1}</span></p></body></html>"))
