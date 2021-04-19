@@ -6,6 +6,14 @@ from Student_Information_GUI import Ui_Form
 import datetime
 import db_backend
 import uuid
+import os
+import yaml
+
+folder = os.path.dirname(os.path.abspath(__file__))
+config = yaml.load(open(folder+'/config.yaml', 'r'), Loader=yaml.FullLoader)
+gmail_user = config['gmail_user']
+gmail_password = config['gmail_password']
+HEARTBEAT_MSEC = config['heartbeat_msec']
 
 class LessonWidget(QtWidgets.QWidget):
     def __init__(self, parent=None, course_name="", course_code="", venue="", type="", start_datetime="", end_datetime=""):
@@ -47,8 +55,6 @@ class MaterialWidget(QtWidgets.QWidget):
         widgetLayout.addStretch()
         self.setLayout(widgetLayout)
 
-HEARTBEAT_MSEC = 5000
-
 class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
     def __init__(self, student_id, timestamp):
         super(InfoWindow, self).__init__()
@@ -73,9 +79,11 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         sent_msg = email.message.EmailMessage()
         sent_msg.set_content(self.msg_html, subtype = 'html')
         sent_msg['Subject'] = 'Lesson reminder'
-        sent_msg['From'] = 'robocon@hku.hk'
-        sent_msg['To'] = self.email
-        smtp_server = smtplib.SMTP('mail.cs.hku.hk')
+        sent_msg['From'] = gmail_user
+        sent_msg['To'] = self.email_address
+        smtp_server = smtplib.SMTP('smtp.gmail.com', 587)
+        smtp_server.starttls()
+        smtp_server.login(gmail_user, gmail_password)
         smtp_server.send_message(sent_msg)
         smtp_server.quit()
 

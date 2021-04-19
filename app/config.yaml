@@ -1,0 +1,3 @@
+gmail_user: 'example@gmail.com'
+gmail_password: 'password'
+heartbeat_msec: 5000
