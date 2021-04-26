@@ -2,6 +2,7 @@ import sys
 from PyQt5 import QtCore, QtWidgets
 from Welcome_GUI import Ui_Form
 from Student_Information_code import InfoWindow
+from Teacher_Information_code import LogInfoWindow
 
 # USB camera display using PyQt and OpenCV, from iosoft.blog
 # Copyright (c) Jeremy P Bentham 2019
@@ -62,6 +63,7 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
         self.setupUi(self)
         self.OkayButton_Welcome.clicked.connect(self.face_login)
         self.OkayButton_Welcome_2.clicked.connect(self.text_login)
+        self.OkayButton_Welcome_3.clicked.connect(self.check_log)
         self._new_window = None
         self.f = FaceRecognition(confidence=config['face_recognition_confidence'])
         self.id_detected = None
@@ -82,7 +84,16 @@ class WelcomeWindow(QtWidgets.QMainWindow, Ui_Form):
             self._new_window.show()
         except IndexError:
             self.label_4.setText(_translate("Form", "<html><head/><body><p style=\"color:red\">Error: User not found</p></body></html>"))
-    
+
+    def check_log(self):
+        _translate = QtCore.QCoreApplication.translate
+        try:
+            self.label_5.setText(_translate("Form", "<html><head/><body><p></p></body></html>"))
+            self._new_window = LogInfoWindow(self.lineEdit_2.text())
+            self._new_window.show()
+        except IndexError:
+            self.label_5.setText(_translate("Form", "<html><head/><body><p style=\"color:red\">Error: Course not found</p></body></html>"))
+        
     # Start image capture & display
     def start(self):
         self.timer = QTimer(self)           # Timer to trigger display
