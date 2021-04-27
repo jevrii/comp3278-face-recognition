@@ -9,6 +9,7 @@ import uuid
 import os
 import yaml
 
+
 folder = os.path.dirname(os.path.abspath(__file__))
 config = yaml.load(open(folder+'/config.yaml', 'r'), Loader=yaml.FullLoader)
 gmail_user = config['gmail_user']
@@ -149,7 +150,13 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 
         else:
             status1 = "You do not have lessons in 1 hour."
-            status2 = "Your upcoming classes:"
+            # status2 = "Your upcoming classes:"
+            sem_time = datetime.datetime(2021,1,10,00,00)
+            now_time = datetime.datetime.strptime(timestamp,'%Y-%m-%d %H:%M:%S')
+            if now_time <= sem_time:
+                status2 = "Your upcoming classes in Semester 1:"
+            else:
+                status2 = "Your upcoming classes in Semester 2:"
             status3 = ""
             week_info = db_backend.GenerateTimetable().get_timetable(student_id, timestamp)
             self.msg_html += "<p>" + status1 + "</p>"
@@ -179,7 +186,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
 if __name__ == '__main__':
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
-    info_window = InfoWindow('177013', '2020-09-03 15:00:00')
+    info_window = InfoWindow('314159', '2020-11-19 10:00:00')
     info_window.show()
     info_window.start()
     sys.exit(app.exec_())

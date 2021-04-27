@@ -7,7 +7,7 @@ Output: {course_name, course_code, venue,type,start_datetime,end_datetime}
 '''
 import mysql.connector
 import  datetime
-from datetime import datetime
+# from datetime import datetime
 
 class GenerateTimetable:
     def __init__(self):
@@ -15,14 +15,14 @@ class GenerateTimetable:
     
     def get_timetable(self, student_id, timestamp):
         mycursor = self.conn.cursor(dictionary=True)
-        sem_time = datetime(2021,1,10,00,00)
-        now_time = datetime.strptime(timestamp,'%Y-%m-%d %H:%M:%S')
+        sem_time = datetime.datetime(2021,1,10,00,00)
+        now_time = datetime.datetime.strptime(timestamp,'%Y-%m-%d %H:%M:%S')
         d = []
         sem_timestamp = str(sem_time)
-        print(sem_time)
-        print(now_time)
-        print(type(sem_time))
-        print(type(now_time))
+        # print(sem_time)
+        # print(now_time)
+        # print(type(sem_time))
+        # print(type(now_time))
 
         # Show sem 1 courses only
         if now_time <= sem_time:
