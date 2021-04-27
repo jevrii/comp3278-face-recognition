@@ -18,10 +18,3 @@ class GetStudentLog:
         for row in mycursor:
             d.append(row)
         return d
-
-a = GetStudentLog()
-b = a.get_info('COMP2119_2C')
-print(b)
-# print(len(b))
-# for i in b:
-#     print("-----",i)

@@ -56,7 +56,6 @@ class LogInfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.msg_html += "<p>" + status1 + "</p>"
 
         self.label.setText(_translate("Form", f"<html><head/><body><p><span style=\" font-size:18pt;\">{welcome_msg}</span></p></body></html>"))
-        print(student_info)
 
         for stu_info in student_info:
             itemN = QtWidgets.QListWidgetItem()
