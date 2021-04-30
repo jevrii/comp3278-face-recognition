@@ -2,3 +2,6 @@ face_recognition_confidence: 40
 gmail_user: 'appapp3278@gmail.com'
 gmail_password: '3278#@&*thREE'
 heartbeat_msec: 5000
+db_user: 'root'
+db_passwd: '123456'
+db_name: 'face_recognition'

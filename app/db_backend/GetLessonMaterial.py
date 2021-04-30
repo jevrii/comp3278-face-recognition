@@ -8,8 +8,8 @@ output: {material_name, material_link}
 '''
 
 class GetLessonMaterial:
-    def __init__(self):
-        self.conn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="face_recognition")
+    def __init__(self, user, passwd, database):
+        self.conn = mysql.connector.connect(host="localhost", user=user, passwd=passwd, database=database)
 
     def get_info(self, course_code):
         mycursor = self.conn.cursor(dictionary=True)

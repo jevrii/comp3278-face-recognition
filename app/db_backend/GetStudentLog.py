@@ -2,8 +2,8 @@ import mysql.connector
 import  datetime
 
 class GetStudentLog:
-    def __init__(self):
-        self.conn = mysql.connector.connect(host="localhost", user="root", passwd="1234", database="face_recognition")
+    def __init__(self, user, passwd, database):
+        self.conn = mysql.connector.connect(host="localhost", user=user, passwd=passwd, database=database)
 
     def get_info(self, course_code):
         mycursor = self.conn.cursor(dictionary=True)

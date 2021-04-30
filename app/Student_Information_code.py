@@ -14,6 +14,9 @@ folder = os.path.dirname(os.path.abspath(__file__))
 config = yaml.load(open(folder+'/config.yaml', 'r'), Loader=yaml.FullLoader)
 gmail_user = config['gmail_user']
 gmail_password = config['gmail_password']
+db_user = config['db_user']
+db_passwd = config['db_passwd']
+db_name = config['db_name']
 HEARTBEAT_MSEC = config['heartbeat_msec']
 
 class LessonWidget(QtWidgets.QWidget):
@@ -67,7 +70,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
         self.fill_information(student_id, timestamp)
         self.session_id = str(uuid.uuid4())
 
-        self.session_db_handler = db_backend.GenerateLoginLog()
+        self.session_db_handler = db_backend.GenerateLoginLog(db_user, db_passwd, db_name)
 
         self.session_db_handler.login_record(student_id, self.session_id)
 
@@ -91,7 +94,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
     def fill_information(self, student_id, timestamp):
         _translate = QtCore.QCoreApplication.translate
 
-        student_info = db_backend.GetStudentInfoAndCourse().get_info(student_id, timestamp)
+        student_info = db_backend.GetStudentInfoAndCourse(db_user, db_passwd, db_name).get_info(student_id, timestamp)
         self.email_address = student_info['email']
 
         cur_time = datetime.datetime.strptime(timestamp, '%Y-%m-%d %H:%M:%S')
@@ -117,7 +120,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
             status1 = f"You have lessons in 1 hour - {student_info['lessons'][0]['course_code']} {start_datetime.hour}:{start_datetime.minute} - {end_datetime.hour}:{end_datetime.minute}  -- Venue: {student_info['lessons'][0]['venue']}" 
             status2 = "Class material:"
             status3 = f"Teacher's Message: {student_info['lessons'][0]['teacher_msg']}"
-            lesson_info = db_backend.GetLessonMaterial().get_info(student_info['lessons'][0]['course_code'])
+            lesson_info = db_backend.GetLessonMaterial(db_user, db_passwd, db_name).get_info(student_info['lessons'][0]['course_code'])
             self.msg_html += "<p>" + status1 + "</p>"
             self.msg_html += "<p>" + status3 + "</p>"
             self.msg_html += "<p>" + status2 + "</p>"
@@ -158,7 +161,7 @@ class InfoWindow(QtWidgets.QMainWindow, Ui_Form):
             else:
                 status2 = "Your upcoming classes in Semester 2:"
             status3 = ""
-            week_info = db_backend.GenerateTimetable().get_timetable(student_id, timestamp)
+            week_info = db_backend.GenerateTimetable(db_user, db_passwd, db_name).get_timetable(student_id, timestamp)
             self.msg_html += "<p>" + status1 + "</p>"
             self.msg_html += "<p>" + status2 + "</p>"
 

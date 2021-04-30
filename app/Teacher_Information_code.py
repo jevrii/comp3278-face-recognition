@@ -12,6 +12,9 @@ import yaml
 
 folder = os.path.dirname(os.path.abspath(__file__))
 config = yaml.load(open(folder+'/config.yaml', 'r'), Loader=yaml.FullLoader)
+db_user = config['db_user']
+db_passwd = config['db_passwd']
+db_name = config['db_name']
 
 class CheckWidget(QtWidgets.QWidget):
     def __init__(self, parent=None, student_name="",student_id="",last_heartbeat=""):
@@ -46,7 +49,7 @@ class LogInfoWindow(QtWidgets.QMainWindow, Ui_Form):
     def fill_information(self, course_code):
         _translate = QtCore.QCoreApplication.translate
 
-        student_info = db_backend.GetStudentLog().get_info(course_code)
+        student_info = db_backend.GetStudentLog(db_user, db_passwd, db_name).get_info(course_code)
 
         welcome_msg = "Check Login Time for students"
         self.msg_html += "<p>" + welcome_msg + "</p>"
@@ -79,6 +82,6 @@ class LogInfoWindow(QtWidgets.QMainWindow, Ui_Form):
 if __name__ == '__main__':
     QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling)
     app = QtWidgets.QApplication(sys.argv)
-    info_window = LogInfoWindow('COMP2119_2C')
+    info_window = LogInfoWindow('COMP1117_1A')
     info_window.show()
     sys.exit(app.exec_())

@@ -7,8 +7,8 @@ Output: (nothing)
 '''
 import mysql.connector
 class GenerateLoginLog:
-    def __init__(self):
-        self.conn = mysql.connector.connect(host="localhost", user="root", passwd="123456", database="face_recognition")
+    def __init__(self, user, passwd, database):
+        self.conn = mysql.connector.connect(host="localhost", user=user, passwd=passwd, database=database)
     
     def login_record(self, student_id, session_id):
         mycursor = self.conn.cursor(dictionary=True)

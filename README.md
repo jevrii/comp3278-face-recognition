@@ -35,6 +35,10 @@ You'll obtain an account and password after installation, then you should modify
 myconn = mysql.connector.connect(host="localhost", user="root", passwd="xxxxx", database="facerecognition")
 ```
 
+### Database credentials setup
+
+Change `db_user`, `db_passwd`, `db_name` in `app/config.yml` accordingly.
+
 ### Email setup
 
 This app uses the gmail SMTP server. To use the "send to my email" feature, change the credentials in `app/config.yaml`. 
