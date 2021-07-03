@@ -28,16 +28,9 @@ tar -xvzf train.tar.gz
 
 [Windows](https://dev.mysql.com/downloads/installer/)
 
-You'll obtain an account and password after installation, then you should modify the appropiate files in `cv_backend/*.py`, with the corresponding username and password:
-
-```py
-# create database connection
-myconn = mysql.connector.connect(host="localhost", user="root", passwd="xxxxx", database="facerecognition")
-```
-
 ### Database credentials setup
 
-Change `db_user`, `db_passwd`, `db_name` in `app/config.yml` accordingly.
+You should obtain an account and password after MySQL installation. Change `db_user`, `db_passwd`, `db_name` in `app/config.yml` accordingly.
 
 ### Email setup
 
